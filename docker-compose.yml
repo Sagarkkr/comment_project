@@ -4,10 +4,12 @@ version: '3.8'
 services:
   web:
     build: .
-    command: bash -c "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 moderation.wsgi:application"
+    command: bash -c "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 comment.wsgi:application"
     volumes:
-      - .:/app
+      - .:/comment
+      - ./static:/comment/static
     ports:
       - "8000:8000"
+
 
   
