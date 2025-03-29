@@ -22,4 +22,4 @@ RUN python manage.py collectstatic --noinput
 
 RUN python manage.py migrate 
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "moderation.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "comment.wsgi:application"]
