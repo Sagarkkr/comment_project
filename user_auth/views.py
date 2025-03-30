@@ -19,7 +19,7 @@ class UserAuthViewset(viewsets.GenericViewSet,mixins.CreateModelMixin):
     permission_classes = [AllowAny]
 
 
-    @action(detail=False, methods=['PATCH'],permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['PATCH'],permission_classes=[IsAuthenticated],serializer_class=ChangePasswordSerializer)
     def change_password(self, request, *args, **kwargs):
         '''
         This function is used for changing the current dashboard user password with some validations applied on serializers.
@@ -52,7 +52,7 @@ class UserAuthViewset(viewsets.GenericViewSet,mixins.CreateModelMixin):
                 return Response({'error': 'Password must be at least 8 characters long.'}, status=status.HTTP_403_FORBIDDEN)
             return Response({'error': f'An error occurred while changing the password {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=False, methods=['PATCH'],permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['PATCH'],permission_classes=[IsAuthenticated],serializer_class=ResetPasswordSerializer)
     def reset_password(self, request):
         '''
             Reset password to change password 
@@ -75,7 +75,7 @@ class UserAuthViewset(viewsets.GenericViewSet,mixins.CreateModelMixin):
             return Response({'error': f'An error occurred while resetting the password. Error: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-    @action(detail=False, methods=['POST'],permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=['POST'],permission_classes=[IsAuthenticated],serializer_class=Logoutserializer)
     def logout(self, request):
         '''
          Logout the user by deleting the token of user

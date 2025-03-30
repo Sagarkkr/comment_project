@@ -31,7 +31,7 @@ class CommentHandleViewset(viewsets.GenericViewSet,mixins.ListModelMixin,mixins.
         except Exception as e:
             return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(methods=['POST'],detail=True)
+    @action(methods=['PATCH'],detail=True)
     def mark_as_approved(self,request,pk):
         """
             Function to mark a comment as approved
